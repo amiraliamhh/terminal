@@ -1,0 +1,74 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react-hooks"
+  ],
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".ts", ".tsx", ".jsx"]
+      }
+    ],
+    "max-len": ["error", 80],
+    "semi": "off",
+    "@typescript-eslint/semi": ["error", "never"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "require-await": "off",
+    "@typescript-eslint/require-await": "error",
+    "space-before-function-paren": "off",
+    "@typescript-eslint/space-before-function-paren": ["error"],
+    "space-infix-ops": "off",
+    "@typescript-eslint/space-infix-ops": ["error", { "int32Hint": false }],
+    "quotes": "off",
+    "@typescript-eslint/quotes": ["error", "single"],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "no-throw-literal": "off",
+    "@typescript-eslint/no-throw-literal": ["error"],
+    "no-extra-parens": "off",
+    "@typescript-eslint/no-extra-parens": ["error"],
+    "dot-notation": "off",
+    "@typescript-eslint/dot-notation": ["error"],
+    "comma-dangle": "off",
+    "@typescript-eslint/comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+  }],
+    "no-redeclare": "off",
+    "@typescript-eslint/no-redeclare": ["error"],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": true,
+        "checksConditionals": false
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@import "src/styles/colors";
+
+$header-height: 2rem;
+
+.terminal {
+  width: 100vw;
+  height: 100vh;
+  background: $dark;
+  padding: .5rem;
+  color: $light;
+  cursor: text;
+
+  header {
+    height: $header-height;
+    cursor: auto;
+
+    .terminal__bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: $header-height;
+      background-color: $grey;
+      box-shadow: 0 0 0 1px black;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &__command {
+    width: 100%;
+
+    p {
+      display: inline;
+      line-height: 1.5rem;
+
+      &:nth-child(2) {
+        padding: 0 0 0 .75rem;
+
+        &:focus {
+          outline: 0 transparent;
+        }
+      }
+    }
+  }
+}

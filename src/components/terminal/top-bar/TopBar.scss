@@ -1,0 +1,72 @@
+@import "src/styles/colors";
+
+$header-height: 1.75rem;
+
+@mixin bar {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: $header-height;
+  background-color: $grey;
+  display: flex;
+  align-items: center;
+  padding: 0 .5rem;
+}
+
+.top-bar {
+  height: $header-height * 2;
+  cursor: auto;
+
+  &__toolbar {
+    @include bar;
+
+    top: 0;
+    z-index: 1;
+
+    & > * {
+      flex-basis: 100%;
+    }
+
+    h5 {
+      font-weight: 300;
+      text-align: center;
+    }
+  }
+
+  &__toolbar-options {
+    display: flex;
+
+    & > * {
+      margin-right: .5rem;
+    }
+  }
+
+  &__tabs {
+    @include bar;
+
+    top: $header-height;
+    justify-content: center;
+    box-shadow: 0 1px .5px 1px $dark-800;
+    font-size: .75rem;
+
+    &--path {
+      opacity: 50%;
+      margin: 0 .5rem;
+    }
+
+    &--add {
+      border: none;
+      cursor: pointer;
+      background-color: $dark-500;
+      height: 100%;
+      width: $header-height;
+      position: absolute;
+      right: 0;
+      font-size: .75rem;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 25%);
+      }
+    }
+  }
+}

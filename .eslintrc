@@ -24,7 +24,10 @@
         "extensions": [".ts", ".tsx", ".jsx"]
       }
     ],
-    "max-len": ["error", 80],
+    "max-len": ["error", {
+      "code": 120,
+      "tabWidth": 0
+    }],
     "semi": "off",
     "@typescript-eslint/semi": ["error", "never"],
     "no-unused-vars": "off",

@@ -1,25 +1,24 @@
 import React, { useRef, useEffect } from 'react'
-import { InputLine, InputLineRef } from './commander'
+import { Cli, InputLineRef } from './commander'
 import { TopBar } from './top-bar'
 
 import './Terminal.scss'
 
 export const Terminal = () => {
-  const lastCommander = useRef<InputLineRef>(null)
+  const cliRef = useRef<InputLineRef>(null)
   const topBarRef = useRef<HTMLDivElement>(null)
 
-  const focusOnLastCommand = (e?: React.MouseEvent<HTMLDivElement>) => {
+  const focusOnLastCommand = (e: React.MouseEvent<HTMLDivElement>) => {
     if (
-      e &&
-      (!topBarRef.current ||
-      !topBarRef.current?.contains(e.target as Node))
+      !topBarRef.current ||
+      !topBarRef.current?.contains(e.target as Node)
     ) {
-      lastCommander?.current?.focusInput()
+      cliRef?.current?.focusInput()
     }
   }
 
   useEffect(() => {
-    focusOnLastCommand()
+    cliRef?.current?.focusInput()
   }, [])
 
   return (
@@ -28,7 +27,7 @@ export const Terminal = () => {
         <div ref={topBarRef}>
           <TopBar />
         </div>
-        <InputLine ref={lastCommander} acceptsInput content='a.heidari@aheidaris-MacBook-Pro me %' />
+        <Cli ref={cliRef} />
       </div>
     </>
   )

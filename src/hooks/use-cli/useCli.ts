@@ -38,6 +38,50 @@ export const commands: CommandsList = {
       ])
     },
   },
+  ls: {
+    name: 'ls',
+    action: () => { /* */ },
+  },
+  cd: {
+    name: 'cd',
+    action: () => { /* */ },
+  },
+  mkdir: {
+    name: 'mkdir',
+    action: () => { /* */ },
+  },
+  rm: {
+    name: 'rm',
+    action: () => { /* */ },
+  },
+  curl: {
+    name: 'curl',
+    action: () => { /* */ },
+  },
+  help: {
+    name: 'help',
+    action: () => { /* */ },
+  },
+  whoami: {
+    name: 'whoami',
+    action: () => { /* */ },
+  },
+  resume: {
+    name: 'resume',
+    action: () => { /* */ },
+  },
+  xp: {
+    name: 'xp',
+    action: () => { /* */ },
+  },
+  edu: {
+    name: 'edu',
+    action: () => { /* */ },
+  },
+  pwd: {
+    name: 'pwd',
+    action: () => { /* */ },
+  },
 }
 
 const commandParser = new CommandParser({

@@ -31,7 +31,9 @@
     "semi": "off",
     "@typescript-eslint/semi": ["error", "never"],
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-unused-vars": ["error", {
+      "argsIgnorePattern": "_"
+    }],
     "require-await": "off",
     "@typescript-eslint/require-await": "error",
     "space-before-function-paren": "off",

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import { Dropdown, DropdownProps } from 'src/components/shared'
 
 describe('Components - shared - dropdown - Dropdown', () => {
@@ -28,8 +28,8 @@ describe('Components - shared - dropdown - Dropdown', () => {
         },
       ],
     }
-    const { container } = render(<Dropdown {...dropdownOptions} />)
-    fireEvent.click(container)
-    expect(screen.getAllByRole('menuitem')).toHaveLength(dropdownOptions.items.length)
+    const { getByRole, getAllByRole } = render(<Dropdown {...dropdownOptions} />)
+    fireEvent.click(getByRole('menu'))
+    expect(getAllByRole('menuitem')).toHaveLength(dropdownOptions.items.length)
   })
 })

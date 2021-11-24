@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { useOutsideClick } from 'src/hooks'
 import './Dropdown.scss'
 
 interface DropdownItem {
@@ -17,16 +18,26 @@ export const Dropdown = (
     items = [],
   }: DropdownProps
 ) => {
+  const dropdownContainer = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
 
   const toggleDropdown = () => {
     setOpen((prev) => !prev)
   }
 
+  const closeDropdown = () => {
+    setOpen(false)
+  }
+
+  useOutsideClick({
+    onOutsideClick: closeDropdown,
+    containerRef: dropdownContainer,
+  })
+
   return (
     <>
-      <div className='dropdown'>
-        <button className='dropdown__title-btn' onClick={toggleDropdown}>
+      <div ref={dropdownContainer} className='dropdown'>
+        <button role='menu' className='dropdown__title-btn' onClick={toggleDropdown}>
           {title}
         </button>
         {

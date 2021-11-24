@@ -25,16 +25,20 @@ interface UseCliHook {
   lines: CommandLine[]
 }
 
-export const commands: CommandsList = {
-  clear: {
-    name: 'clear',
-    action: () => { /* */ },
-  },
-}
-
 const lastInputLineFactory = (): CommandLine => ({
   content: 'a.heidari@aheidaris-MacBook-Pro me %',
 })
+
+export const commands: CommandsList = {
+  clear: {
+    name: 'clear',
+    action: (setLines) => {
+      setLines([
+        lastInputLineFactory(),
+      ])
+    },
+  },
+}
 
 const commandParser = new CommandParser({
   validCommands: Object.keys(commands),

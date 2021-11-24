@@ -30,8 +30,32 @@ describe('hooks - useCli', () => {
 
     const { result } = renderHook(() => useCli())
 
-    result.current.exec(key)
+    act(() => {
+      result.current.exec(key)
+    })
 
     expect(spy).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('hooks - useCli - commands -> clear', () => {
+  test('Should clear the terminal', () => {
+    const { result } = renderHook(() => useCli())
+
+    const defaultLinesLen = result.current.lines.length
+
+    act(() => {
+      for (let i = 0; i < 10; i++) {
+        result.current.exec('')
+      }
+    })
+
+    expect(result.current.lines.length).toBe(10 + defaultLinesLen)
+
+    act(() => {
+      result.current.exec('clear')
+    })
+
+    expect(result.current.lines.length).toBe(defaultLinesLen)
   })
 })

@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const nodeEnv = process.env.NODE_ENV || 'development'
 
@@ -52,7 +53,9 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin(),
+      new TerserPlugin(),
     ],
+    usedExports: true,
   },
   devServer: {
     compress: true,

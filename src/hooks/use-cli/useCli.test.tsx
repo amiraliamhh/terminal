@@ -1,6 +1,9 @@
 import '@testing-library/jest-dom'
-import { renderHook, act } from '@testing-library/react-hooks'
-import { useCli, commands } from './useCli'
+import { renderHook, act, RenderResult } from '@testing-library/react-hooks'
+import { useCli, UseCliHook } from './useCli'
+import { commands } from './commands'
+import { goBack } from './cmds/utils'
+import { fs } from 'src/hooks/use-fs/useFs'
 
 describe('hooks - useCli', () => {
   test('Lines object should have at least one default value', () => {
@@ -56,6 +59,50 @@ describe('hooks - useCli - commands -> clear', () => {
       result.current.exec('clear')
     })
 
-    expect(result.current.lines.length).toBe(defaultLinesLen)
+    expect(result.current.lines.length).toBe(1)
+  })
+})
+
+describe('hooks - useCli - commands -> mkdir', () => {
+  let result: RenderResult<UseCliHook>
+
+  beforeEach(() => {
+    const hook = renderHook(() => useCli())
+    result = hook.result
+  })
+
+  test('Should create a new dir in the cwd with dir name', () => {
+    const cwd = result.current.currentDir
+    const relativeDir = 'relative'
+
+    act(() => {
+      result.current.exec(`mkdir ${relativeDir}`)
+    })
+
+    expect(fs.dirs.includes(`${cwd}/${relativeDir}`)).toBeTruthy()
+  })
+
+  test('Should create new dir with relative path', () => {
+    const cwd = result.current.currentDir
+    const relativeDir = 'relative'
+
+    act(() => {
+      result.current.exec(`mkdir ./${relativeDir}`)
+    })
+
+    expect(fs.dirs.includes(`${cwd}/${relativeDir}`)).toBeTruthy()
+  })
+
+  test('Should create new dir in prev paths', () => {
+    const cwd = result.current.currentDir
+    const relativeDir = 'relative'
+
+    const backDir = goBack(cwd)
+
+    act(() => {
+      result.current.exec(`mkdir ../${relativeDir}`)
+    })
+
+    expect(fs.dirs).toContain(`${backDir}/${relativeDir}`)
   })
 })

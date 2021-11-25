@@ -1,8 +1,10 @@
-import { useImperativeHandle, forwardRef, ForwardedRef, useRef } from 'react'
+import React, { useImperativeHandle, forwardRef, ForwardedRef, useRef, FormEvent } from 'react'
 
 export interface InputLineProps {
   content: string
   acceptsInput?: boolean
+  history?: string
+  onTextChange?: (text: string) => void
   onSubmit?: (command: string) => void
   onProcessTerminated?: () => void
 }
@@ -15,11 +17,16 @@ export const InputLine = forwardRef(function Commander (
   {
     content,
     acceptsInput = false,
+    history = '',
+    onTextChange,
     onSubmit,
   }: InputLineProps, ref: ForwardedRef<InputLineRef>
 ) {
-  const inputRef = useRef<HTMLParagraphElement>(null)
+  if (history && acceptsInput) {
+    throw new Error('history and acceptsInput props can not be truthy at the same time')
+  }
 
+  const inputRef = useRef<HTMLParagraphElement>(null)
   useImperativeHandle(ref, () => ({
     focusInput () {
       if (acceptsInput && inputRef.current) {
@@ -35,6 +42,10 @@ export const InputLine = forwardRef(function Commander (
     }
   }
 
+  const handleInputChange = (e: FormEvent<HTMLParagraphElement>) => {
+    onTextChange?.((e.target as any).textContent)
+  }
+
   return (
     <div className='terminal__command'>
       <p data-testid='cli-content'>{content}</p>
@@ -46,7 +57,17 @@ export const InputLine = forwardRef(function Commander (
           role='textbox'
           contentEditable
           spellCheck={false}
+          onInput={handleInputChange}
         />
+      }
+      {
+        history &&
+        <p
+          role='textbox'
+          spellCheck={false}
+        >
+          {history}
+        </p>
       }
     </div>
   )

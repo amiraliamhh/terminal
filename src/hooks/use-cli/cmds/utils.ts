@@ -22,7 +22,18 @@ export const findAbsolutePath = (cwd: string, path: string): string => {
   if (path.startsWith('/')) {
     return path
   }
+  if (!path) {
+    return cwd
+  }
+  if (path.startsWith('./')) {
+    return `${cwd}/${path.replace('./', '')}`
+  }
   let backLevel = 0
   path.split('/').filter(p => p === '..').forEach(() => backLevel++)
   return `${goBack(cwd, backLevel)}/${path.replace(new RegExp('../', 'g'), '')}`
+}
+
+export function getLastLevelName (path: string): string {
+  const lastSlash = path.lastIndexOf('/')
+  return path.slice(lastSlash + 1) || '/'
 }

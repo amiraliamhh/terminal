@@ -1,11 +1,15 @@
 import { CommandLine } from 'src/hooks/use-cli/useCli'
 import { CommandAction } from '../commands'
-import { insertNewLine } from './utils'
+import { insertNewLine, findAbsolutePath } from './utils'
 
 export const mkdirAction: CommandAction<CommandLine[]> = (setLines, args, helpers) => {
   try {
-    const fullPath = helpers?.fs?.currentDir
-    helpers?.fs?.createDir(`${fullPath}/${args.value}`)
+    if (args.value) {
+      const fullPath = findAbsolutePath(helpers?.fs?.currentDir || '/', args.value)
+      helpers?.fs?.createDir(fullPath)
+      return
+    }
+    throw new Error('Error: exactly one argument must be provided to mkdir')
   } catch (err: any) {
     setLines(prev => [
       ...prev,

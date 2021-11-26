@@ -2,8 +2,8 @@ import '@testing-library/jest-dom'
 import { renderHook, act, RenderResult } from '@testing-library/react-hooks'
 import { useCli, UseCliHook } from './useCli'
 import { commands } from './commands'
-import { goBack } from './cmds/utils'
-import { fs } from 'src/hooks/use-fs/useFs'
+import { goBack, findAbsolutePath, getLastLevelName } from './cmds/utils'
+import { fs, defaultDirsFactory } from 'src/hooks/use-fs/useFs'
 
 describe('hooks - useCli', () => {
   test('Lines object should have at least one default value', () => {
@@ -67,6 +67,7 @@ describe('hooks - useCli - commands -> mkdir', () => {
   let result: RenderResult<UseCliHook>
 
   beforeEach(() => {
+    fs.dirs = defaultDirsFactory()
     const hook = renderHook(() => useCli())
     result = hook.result
   })
@@ -79,7 +80,7 @@ describe('hooks - useCli - commands -> mkdir', () => {
       result.current.exec(`mkdir ${relativeDir}`)
     })
 
-    expect(fs.dirs.includes(`${cwd}/${relativeDir}`)).toBeTruthy()
+    expect(fs.dirs).toContain(`${cwd}/${relativeDir}`)
   })
 
   test('Should create new dir with relative path', () => {
@@ -104,5 +105,60 @@ describe('hooks - useCli - commands -> mkdir', () => {
     })
 
     expect(fs.dirs).toContain(`${backDir}/${relativeDir}`)
+  })
+})
+
+describe('hooks - useCli - commands -> ls', () => {
+  let result: RenderResult<UseCliHook>
+
+  beforeEach(() => {
+    fs.dirs = defaultDirsFactory()
+    const hook = renderHook(() => useCli())
+    result = hook.result
+  })
+
+  test('ls should return the content of cwd', () => {
+    act(() => {
+      result.current.exec('mkdir test1')
+      result.current.exec('mkdir test2')
+      result.current.exec('ls')
+    })
+
+    const { lines } = result.current
+    expect(lines[lines.length - 2].content).toBe('test1 test2')
+  })
+})
+
+describe('hooks - useCli - pwd', () => {
+  let result: RenderResult<UseCliHook>
+
+  beforeEach(() => {
+    fs.dirs = defaultDirsFactory()
+    const hook = renderHook(() => useCli())
+    result = hook.result
+  })
+
+  test('ls should return the content of cwd', () => {
+    act(() => {
+      result.current.exec('pwd')
+    })
+
+    const { lines } = result.current
+    expect(lines[lines.length - 2].content).toBe(result.current.currentDir)
+  })
+})
+
+describe('hooks - useCli - utils', () => {
+  test('findAbsolutePath', () => {
+    expect(findAbsolutePath('/profile/me', './new')).toBe('/profile/me/new')
+    expect(findAbsolutePath('/profile/me', '../new')).toBe('/profile/new')
+    expect(findAbsolutePath('/profile', '../new')).toBe('/new')
+    expect(findAbsolutePath('/profile', '/new')).toBe('/new')
+    expect(findAbsolutePath('/profile', '')).toBe('/profile')
+  })
+
+  test('getLastLevelName', () => {
+    expect(getLastLevelName('/test')).toBe('test')
+    expect(getLastLevelName('/')).toBe('/')
   })
 })

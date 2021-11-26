@@ -19,6 +19,10 @@
       display: inline;
       line-height: 1.5rem;
 
+      &:first-child {
+        color: $green;
+      }
+
       &:nth-child(2) {
         padding: 0 0 0 .75rem;
 

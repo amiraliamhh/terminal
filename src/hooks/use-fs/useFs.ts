@@ -13,11 +13,13 @@ export const FSErrors = {
   },
 }
 
+export const defaultDirsFactory = () => [
+  '/',
+  '/profile',
+]
+
 export const fs: FSStructure = {
-  dirs: [
-    '/',
-    '/profile',
-  ],
+  dirs: defaultDirsFactory(),
 }
 
 export interface UseFsHook {

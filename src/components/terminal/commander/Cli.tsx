@@ -1,4 +1,4 @@
-import React, { forwardRef, ForwardedRef, useEffect, RefObject } from 'react'
+import { forwardRef, ForwardedRef, useEffect, RefObject } from 'react'
 import { InputLine, InputLineRef } from './InputLine'
 import { useCli } from 'src/hooks'
 

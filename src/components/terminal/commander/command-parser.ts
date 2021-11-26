@@ -23,7 +23,7 @@ export class CommandParser {
   }
 
   public parse (command: string): ParsedCommand | never {
-    const [name, ...rest] = command.split(' ')
+    const [name, ...rest] = command.trim().split(' ')
     if (!this.validCommands.includes(name)) {
       throw new Error(`Unknown command \`${name}\``)
     }

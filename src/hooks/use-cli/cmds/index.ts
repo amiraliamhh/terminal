@@ -1,3 +1,6 @@
 export { mkdirAction } from './mkdir'
 export { lsAction } from './ls'
 export { pwdAction } from './pwd'
+export { helpAction } from './help'
+export { whoamiAction } from './whoami'
+export { cdAction } from './cd'

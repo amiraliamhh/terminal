@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 interface FSStructure {
   dirs: string[]
@@ -40,17 +40,19 @@ export function isPath (path: string): boolean {
 
 export const useFs = (): UseFsHook => {
   const [currentDir, setCurrentDir] = useState('/profile')
+  const cwd = useRef(currentDir)
 
   const setNextDir = (dir: string) => {
     if (fs.dirs.includes(dir)) {
       setCurrentDir(dir)
+      cwd.current = dir
       return
     }
     throw new Error(FSErrors.InvalidDir(dir))
   }
 
   const getCurrentDirName = (): string => {
-    const dirLevels = currentDir.split('/')
+    const dirLevels = cwd.current.split('/')
     return dirLevels[dirLevels.length - 1]
   }
 

@@ -12,5 +12,6 @@ export const WelcomeLine =
     <br />
     Also, you are more than welcome to learn more about me using this terminal!
     <br />
-    Just type "help" to get a list of all of the available commands.
+    You can start by typing "whoami", or you can
+    just type "help" to get a list of all of the available commands.
   </p>

@@ -1,7 +1,7 @@
 import { ParsedCommand } from 'src/components/terminal/commander'
 import { UseFsHook } from 'src/hooks'
 import { CommandLine } from './useCli'
-import { mkdirAction, lsAction, pwdAction } from './cmds'
+import { mkdirAction, lsAction, pwdAction, helpAction, whoamiAction, cdAction } from './cmds'
 
 export type CommandAction<T> = (
   setState: React.Dispatch<React.SetStateAction<T>>,
@@ -44,7 +44,7 @@ export const commands: CommandsList = {
   },
   cd: {
     name: 'cd',
-    action: () => { /* */ },
+    action: cdAction,
   },
   mkdir: {
     name: 'mkdir',
@@ -60,11 +60,11 @@ export const commands: CommandsList = {
   },
   help: {
     name: 'help',
-    action: () => { /* */ },
+    action: helpAction,
   },
   whoami: {
     name: 'whoami',
-    action: () => { /* */ },
+    action: whoamiAction,
   },
   resume: {
     name: 'resume',

@@ -1,9 +1,14 @@
 import { Terminal } from 'src/components/terminal'
+import { Router, Route } from 'src/components/router'
 
 export const App = () => {
   return (
     <>
-      <Terminal />
+      <Router>
+        <Route path='/'>
+          <Terminal />
+        </Route>
+      </Router>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { CommandParser } from 'src/components/terminal/commander'
 import { useFs } from 'src/hooks'
+import { insertNewLine } from './cmds/utils'
 import { commands, lastInputLineFactory } from './commands'
 import { WelcomeLine } from './welcome'
 
@@ -46,10 +47,23 @@ export const useCli = (): UseCliHook => {
       ])
       return
     }
-    const parsed = commandParser.parse(cmd)
-    commands[parsed.name].action(setLines, parsed, {
-      fs,
-    })
+    try {
+      const parsed = commandParser.parse(cmd)
+      commands[parsed.name].action(setLines, parsed, {
+        fs,
+      })
+    } catch (err: any) {
+      setLines(prev => [
+        ...prev,
+        {
+          content: 
+            <p>{err.message}</p>
+          ,
+          type: 'info',
+        },
+      ])
+      insertNewLine(setLines, fs)
+    }
   }
   
   return {

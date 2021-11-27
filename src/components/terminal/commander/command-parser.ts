@@ -25,7 +25,7 @@ export class CommandParser {
   public parse (command: string): ParsedCommand | never {
     const [name, ...rest] = command.trim().split(' ')
     if (!this.validCommands.includes(name)) {
-      throw new Error(`Unknown command \`${name}\``)
+      throw new Error(`zsh: command not found: \`${name}\``)
     }
     const args = {} as CommandArgs
     let value = null

@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 import { renderHook, act, RenderResult } from '@testing-library/react-hooks'
 import { useCli, UseCliHook } from './useCli'
 import { commands } from './commands'
@@ -125,7 +126,11 @@ describe('hooks - useCli - commands -> ls', () => {
     })
 
     const { lines } = result.current
-    expect(lines[lines.length - 2].content).toBe('test1 test2')
+    const line = lines[lines.length - 2].content
+
+    const { getByText } = render(typeof line === 'string' ? <p>{line}</p> : line)
+
+    expect(getByText('test1 test2')).toBeInTheDocument()
   })
 })
 
@@ -144,7 +149,8 @@ describe('hooks - useCli - pwd', () => {
     })
 
     const { lines } = result.current
-    expect(lines[lines.length - 2].content).toBe(result.current.currentDir)
+    const { getByText } = render(lines[lines.length - 2].content as JSX.Element)
+    expect(getByText(result.current.currentDir)).toBeInTheDocument()
   })
 })
 

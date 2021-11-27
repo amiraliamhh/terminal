@@ -9,7 +9,7 @@ export const pwdAction: CommandAction<CommandLine[]> = (setLines, args, helpers)
     setLines(prev => [
       ...prev,
       {
-        content: cwd || '/',
+        content: <p>{cwd || '/'}</p>,
         type: 'info',
       },
     ])

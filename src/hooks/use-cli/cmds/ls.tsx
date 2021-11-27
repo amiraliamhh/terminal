@@ -15,7 +15,7 @@ export const lsAction: CommandAction<CommandLine[]> = (setLines, args, helpers) 
     setLines(prev => [
       ...prev,
       {
-        content: resultStr,
+        content: <p>{resultStr}</p>,
         type: 'info',
       },
     ])

@@ -5,6 +5,7 @@ const StylelintPlugin = require('stylelint-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const nodeEnv = process.env.NODE_ENV || 'development'
 
@@ -42,12 +43,20 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'public', 'index.html')
+      template: path.resolve(__dirname, 'public', 'index.html'),
+      favicon: 'static/amiraliamhh.ico',
     }),
     new MiniCssExtractPlugin({
       filename: 'styles.[contenthash].css'
     }),
     new StylelintPlugin({}),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'static'
+        }
+      ]
+    }),
   ],
   optimization: {
     minimize: true,

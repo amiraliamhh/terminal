@@ -1,15 +1,22 @@
 @import "src/styles/colors";
 
+table {
+  a {
+    &,
+    &:visited {
+      color: $light !important;
+    }
+  }
+}
+
 .xp {
   &--title {
     color: $cyan;
   }
 
-  p {
-    line-height: 1.5rem;
-  }
-
+  // stylelint-disable-next-line
   a {
+    // stylelint-disable-next-line
     &,
     &:visited {
       color: $blue;

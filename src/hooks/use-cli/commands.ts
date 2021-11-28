@@ -4,7 +4,7 @@ import { CommandLine } from './useCli'
 import { 
   mkdirAction, lsAction, pwdAction, helpAction,
   whoamiAction, cdAction, eduAction, xpAction,
-  resumeAction,
+  resumeAction, conAction,
 } from './cmds'
 
 export type CommandAction<T> = (
@@ -85,6 +85,10 @@ export const commands: CommandsList = {
   skills: {
     name: 'skills',
     action: () => { /* */ },
+  },
+  con: {
+    name: 'con',
+    action: conAction,
   },
   pwd: {
     name: 'pwd',

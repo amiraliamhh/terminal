@@ -120,6 +120,7 @@ const xps: JSX.Element[] = [
   XPJabama,
   XPLegamart,
   XPArta,
+  XPBitooman,
 ]
 
 export const xpAction: CommandAction<CommandLine[]> = (setLines, args, helpers) => {

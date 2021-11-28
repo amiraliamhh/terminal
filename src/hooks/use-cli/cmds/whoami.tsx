@@ -9,7 +9,12 @@ export const whoamiAction: CommandAction<CommandLine[]> = (setLines, args, helpe
       {
         content: 
         <p>
-          I'm Amirali! (TODO)  
+          I'm a framework-agnostic full-stack Javascript developer with more focus on the front-end.
+          I have over 4 years of experience working in cross- functional and agile teams. I'm focused
+          on the entire pipeline of developing a web application, from collaboration with product
+          managers and working on new ideas to deployment.
+          <br />
+          Code reviews and improving the existing code base are part of my daily routine.
         </p>,
         type: 'info',
       },

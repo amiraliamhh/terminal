@@ -11,6 +11,7 @@
 
   p {
     margin: 0;
+    line-height: 1.5rem;
   }
 
   &__command {
@@ -18,7 +19,6 @@
 
     p {
       display: inline;
-      line-height: 1.5rem;
 
       &:first-child {
         color: $green;

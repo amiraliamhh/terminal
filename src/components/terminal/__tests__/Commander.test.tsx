@@ -63,10 +63,6 @@ describe('components - terminal - commander - command-parser', () => {
     })
 
     test('Should throw on invalid option', () => {
-      const execWithInvalidOption1 = () => {
-        commandParser.parse('cmd -a')
-      }
-      expect(execWithInvalidOption1).toThrowError()
       const execWithInvalidOption2 = () => {
         commandParser.parse('cmd value --a')
       }

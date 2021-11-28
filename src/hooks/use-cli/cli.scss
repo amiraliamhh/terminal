@@ -1,0 +1,35 @@
+@import "src/styles/colors";
+
+.xp {
+  &--title {
+    color: $cyan;
+  }
+
+  p {
+    line-height: 1.5rem;
+  }
+
+  a {
+    &,
+    &:visited {
+      color: $blue;
+    }
+  }
+
+  ul {
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      margin: .5rem 0;
+      display: flex;
+
+      &::before {
+        content: "\2022";
+        color: $light;
+        font-weight: bold;
+        min-width: 1em;
+      }
+    }
+  }
+}

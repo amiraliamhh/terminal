@@ -4,6 +4,7 @@ import { useFs } from 'src/hooks'
 import { insertNewLine } from './cmds/utils'
 import { commands, lastInputLineFactory } from './commands'
 import { WelcomeLine } from './welcome'
+import './cli.scss'
 
 type CommandLineType = 'info' | 'input'
 

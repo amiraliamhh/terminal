@@ -1,5 +1,4 @@
 interface CommandArgs {
-
   [key: string]: string | boolean
 }
 
@@ -39,6 +38,12 @@ export class CommandParser {
       } else if (arg.startsWith('--')) {
         args[arg.replace('--', '')] = true
         i++
+      } else if (arg.startsWith('-') && rest[i + 1] && !rest[i + 1].startsWith('-')) {
+        args[arg.replace('-', '')] = rest[i + 1]
+        i += 2
+      } else if (arg.startsWith('-')) {
+        args[arg.replace('-', '')] = true
+        i++ 
       } else if (i === rest.length - 1 && !arg.startsWith('-')) {
         value = arg
         i++

@@ -14,7 +14,7 @@ export const mkdirAction: CommandAction<CommandLine[]> = (setLines, args, helper
     setLines(prev => [
       ...prev,
       {
-        content: `Error: ${err.message || ''}`,
+        content: <p>Error: {err.message || ''}</p>,
         type: 'info',
       },
     ])

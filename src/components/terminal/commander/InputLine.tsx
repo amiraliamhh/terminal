@@ -6,11 +6,14 @@ export interface InputLineProps {
   history?: string
   onTextChange?: (text: string) => void
   onSubmit?: (command: string) => void
+  onPrevCommand?: () => void
+  onNextCommand?: () => void
   onProcessTerminated?: () => void
 }
 
 export interface InputLineRef {
   focusInput: () => void
+  setTextContent: (text: string) => void
 }
 
 export const InputLine = forwardRef(function Commander (
@@ -20,6 +23,8 @@ export const InputLine = forwardRef(function Commander (
     history = '',
     onTextChange,
     onSubmit,
+    onPrevCommand,
+    onNextCommand,
   }: InputLineProps, ref: ForwardedRef<InputLineRef>
 ) {
   if (history && acceptsInput) {
@@ -33,12 +38,36 @@ export const InputLine = forwardRef(function Commander (
         inputRef.current.focus()
       }
     },
+    setTextContent (text: string) {
+      if (inputRef.current) {
+        inputRef.current.textContent = text
+        const range = document.createRange()
+        range.selectNodeContents(inputRef.current)
+        range.collapse(false)
+        const selection = window.getSelection()
+        selection?.removeAllRanges()
+        selection?.addRange(range)
+        onTextChange?.(text)
+      }
+    },
   }))
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLParagraphElement>) => {
-    if (e.key === 'Enter') {
+    if (['Enter', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
       e.preventDefault()
-      onSubmit?.(inputRef.current?.textContent || '')
+      switch (e.key) {
+        case 'Enter':
+          onSubmit?.(inputRef.current?.textContent || '')     
+          break
+      
+        case 'ArrowUp':
+          onPrevCommand?.()
+          break
+
+        case 'ArrowDown':
+          onNextCommand?.()
+          break
+      }
     }
   }
 

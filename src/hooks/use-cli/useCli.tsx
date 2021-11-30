@@ -19,6 +19,7 @@ export interface UseCliHook {
   lines: CommandLine[]
   setLines: React.Dispatch<React.SetStateAction<CommandLine[]>>
   currentDir: string
+  history: string[]
 }
 
 const commandParser = new CommandParser({
@@ -28,6 +29,7 @@ const commandParser = new CommandParser({
 export const useCli = (): UseCliHook => {
   const fs = useFs()
   const { currentDir, getCurrentDirName } = fs
+  const [history, setHistory] = useState<string[]>([])
   const [lines, setLines] = useState<CommandLine[]>([
     {
       content: WelcomeLine,
@@ -39,6 +41,12 @@ export const useCli = (): UseCliHook => {
   ])
 
   const exec = (cmd: string) => {
+    if (cmd !== history[history.length - 1]) {
+      setHistory(prev => [
+        ...prev,
+        cmd,
+      ])
+    }
     if (!cmd) {
       setLines(prev => [
         ...prev,
@@ -72,5 +80,6 @@ export const useCli = (): UseCliHook => {
     lines,
     setLines,
     currentDir,
+    history,
   }
 }

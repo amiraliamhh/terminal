@@ -1,12 +1,34 @@
-import { forwardRef, ForwardedRef, useEffect, RefObject } from 'react'
+import { forwardRef, ForwardedRef, useEffect, RefObject, useRef } from 'react'
 import { InputLine, InputLineRef } from './InputLine'
 import { useCli } from 'src/hooks'
 
 export const Cli = forwardRef(function Cli (_, inputLineRef: ForwardedRef<InputLineRef>) {
-  const { lines, setLines, exec } = useCli()
+  const cmdHistoryIndex = useRef<number | null>(null)
+  const { lines, setLines, exec, history: cmdHistory } = useCli()
 
   const handleInputLineSubmit = (cmd: string) => {
+    cmdHistoryIndex.current = null
     exec(cmd)
+  }
+
+  const handlePrevCommand = () => {
+    if (cmdHistory.length && cmdHistoryIndex.current === null) {
+      cmdHistoryIndex.current = cmdHistory.length - 1
+      ;(inputLineRef as RefObject<InputLineRef>)?.current?.setTextContent(cmdHistory[cmdHistoryIndex.current])
+    } else if (typeof cmdHistoryIndex.current === 'number' && cmdHistoryIndex.current > 0) {
+      cmdHistoryIndex.current = cmdHistoryIndex.current - 1
+      ;(inputLineRef as RefObject<InputLineRef>)?.current?.setTextContent(cmdHistory[cmdHistoryIndex.current])
+    }
+  }
+
+  const handleNextCommand = () => {
+    if (typeof cmdHistoryIndex.current === 'number' && cmdHistoryIndex.current < cmdHistory.length - 1) {
+      cmdHistoryIndex.current = cmdHistoryIndex.current + 1
+      ;(inputLineRef as RefObject<InputLineRef>)?.current?.setTextContent(cmdHistory[cmdHistoryIndex.current])
+    } else if (typeof cmdHistoryIndex.current === 'number' && cmdHistoryIndex.current === cmdHistory.length - 1) {
+      cmdHistoryIndex.current = null
+      ;(inputLineRef as RefObject<InputLineRef>)?.current?.setTextContent('')
+    }
   }
 
   const handleTextChange = (text: string, index: number) => {
@@ -33,6 +55,8 @@ export const Cli = forwardRef(function Cli (_, inputLineRef: ForwardedRef<InputL
               key={`crow-${Math.random()}-${index}`}
               onTextChange={(text: string) => { handleTextChange(text, index) }}
               onSubmit={handleInputLineSubmit}
+              onPrevCommand={handlePrevCommand}
+              onNextCommand={handleNextCommand}
             />
           )
         }

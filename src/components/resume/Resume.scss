@@ -1,0 +1,167 @@
+$text-primary: #212121;
+$gitlab-orange: #1068bf;
+
+.resume {
+  margin: 2rem;
+
+  * {
+    color: $text-primary;
+    box-sizing: border-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5rem;
+  }
+
+  p {
+    font-size: 14px;
+    letter-spacing: .5px;
+  }
+
+  .b {
+    font-weight: bold;
+  }
+
+  a {
+    color: $text-primary;
+  }
+
+  b {
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .open-source {
+    a {
+      display: block;
+      text-decoration: none;
+    }
+  }
+
+  header {
+    width: 100%;
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: .75rem;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: space-between;
+
+      a,
+      p {
+        font-size: 14px;
+        margin-bottom: .5rem;
+      }
+    }
+  }
+
+  main {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    & > :first-child {
+      width: 65%;
+    }
+
+    & > :nth-child(2) {
+      width: 30%;
+    }
+
+    h4 {
+      color: $gitlab-orange;
+      margin-bottom: .75rem;
+    }
+  }
+
+  .skills {
+    line-height: 1.5;
+  }
+
+  .skills-title {
+    letter-spacing: 1px;
+  }
+
+  .mt-1 {
+    margin-top: 1rem;
+  }
+
+  .mt-2 {
+    margin-top: 2rem;
+  }
+
+  .f-12 {
+    font-size: 12px;
+    display: block;
+    margin-top: .25rem;
+  }
+
+  .company {
+    &__info {
+      b {
+        font-size: 16px;
+      }
+    }
+
+    li {
+      font-size: 14px;
+      margin-bottom: .25rem;
+      line-height: 1.5;
+
+      b {
+        font-size: 14px;
+      }
+    }
+
+    &__position {
+      font-size: 14px;
+    }
+
+    &__presence {
+      font-size: 12px;
+      margin-top: .25rem;
+      display: block;
+    }
+  }
+
+  .t-1 {
+    margin-top: .5rem;
+  }
+
+  .other {
+    margin-top: 5rem;
+  }
+
+  .summary {
+    ul {
+      li {
+        margin-bottom: .5rem;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .f-12-only {
+    font-size: 12px;
+  }
+
+  .free {
+    line-height: 1.5;
+  }
+}

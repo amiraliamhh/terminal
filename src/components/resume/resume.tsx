@@ -6,30 +6,36 @@ export const Resume = () => {
       <header>
         <h1>Amirali Ameri</h1>
         <div className="contact">
-          <p className="b">
-            amiraliamhh@gmail.com
-          </p>
-          <span>•</span>
-          <p className="b">
-            (+98) 919 091 2275
-          </p>‍
-          <span>•</span>
-          <b>
-            <a href="https://www.linkedin.com/in/amiraliameri">
-              linkedin.com/in/amiraliameri
-            </a>
-          </b>
-          <span>•</span>
-          <p>
-            Tehran, Iran
-          </p>
-        </div>
-        <div className="contact">
-          <b>
-            <a href="https://github.com/amiraliamhh">
-              github.com/amiraliamhh
-            </a>
-          </b>
+          <table>
+            <tr>
+              <td>Email:</td>
+              <td>amiraliamhh@gmail.com</td>
+            </tr>
+            <tr>
+              <td>Phone Number:</td>
+              <td>(+98) 919 091 2275</td>
+            </tr>
+            <tr>
+              <td>LinkedIn:</td>
+              <td>
+                <a href="https://www.linkedin.com/in/amiraliameri">
+                  linkedin.com/in/amiraliameri
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Location:</td>
+              <td>Tehran, Iran</td>
+            </tr>
+            <tr>
+              <td>Github:</td>
+              <td>
+                <a href="https://github.com/amiraliamhh">
+                  github.com/amiraliamhh
+                </a>
+              </td>
+            </tr>
+          </table>
         </div>
       </header>
       <hr />
